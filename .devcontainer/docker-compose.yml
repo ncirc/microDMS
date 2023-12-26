@@ -18,6 +18,8 @@ services:
       - couchdb-data:/opt/couchdb/data
     env_file:
       - couchdb.env
+    ports:
+      - 5984:5984
   
 volumes:
   couchdb-data:
