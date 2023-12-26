@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  devcontainer:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+    network_mode: service:db
+    command: sleep infinity
+    env_file:
+      - devcontainer.env
+
+  db:
+    image: docker.io/library/couchdb:3.3.3
+    restart: unless-stopped
+    volumes:
+      - couchdb-data:/opt/couchdb/data
+    env_file:
+      - couchdb.env
+  
+volumes:
+  couchdb-data:
